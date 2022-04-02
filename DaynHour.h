@@ -12,5 +12,6 @@ public:
 	void sethours(int h);
 	int getday();
 	int gethours();
+	string stringdisplay();
 };
 
