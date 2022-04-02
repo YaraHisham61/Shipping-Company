@@ -1,0 +1,26 @@
+﻿  Cargo.cpp
+D:\Collage\Data Structures\Project\DS_Project\DS_Project\Cargolist.h(10,14): error C2065: 'Cargo': undeclared identifier
+D:\Collage\Data Structures\Project\DS_Project\DS_Project\Cargolist.h(10,20): error C2059: syntax error: '>'
+D:\Collage\Data Structures\Project\DS_Project\DS_Project\Cargolist.h(11,14): error C2065: 'Cargo': undeclared identifier
+D:\Collage\Data Structures\Project\DS_Project\DS_Project\Cargolist.h(11,20): error C2059: syntax error: '>'
+D:\Collage\Data Structures\Project\DS_Project\DS_Project\Cargolist.h(12,14): error C2065: 'Cargo': undeclared identifier
+D:\Collage\Data Structures\Project\DS_Project\DS_Project\Cargolist.h(12,20): error C2059: syntax error: '>'
+  Cargolist.cpp
+  Company.cpp
+D:\Collage\Data Structures\Project\DS_Project\DS_Project\Cargolist.h(10,14): error C2065: 'Cargo': undeclared identifier
+D:\Collage\Data Structures\Project\DS_Project\DS_Project\Cargolist.h(10,20): error C2059: syntax error: '>'
+D:\Collage\Data Structures\Project\DS_Project\DS_Project\Cargolist.h(11,14): error C2065: 'Cargo': undeclared identifier
+D:\Collage\Data Structures\Project\DS_Project\DS_Project\Cargolist.h(11,20): error C2059: syntax error: '>'
+D:\Collage\Data Structures\Project\DS_Project\DS_Project\Cargolist.h(12,14): error C2065: 'Cargo': undeclared identifier
+D:\Collage\Data Structures\Project\DS_Project\DS_Project\Cargolist.h(12,20): error C2059: syntax error: '>'
+  Events.cpp
+  test.cpp
+D:\Collage\Data Structures\Project\DS_Project\DS_Project\Cargolist.h(10,14): error C2065: 'Cargo': undeclared identifier
+D:\Collage\Data Structures\Project\DS_Project\DS_Project\Cargolist.h(10,20): error C2059: syntax error: '>'
+D:\Collage\Data Structures\Project\DS_Project\DS_Project\Cargolist.h(11,14): error C2065: 'Cargo': undeclared identifier
+D:\Collage\Data Structures\Project\DS_Project\DS_Project\Cargolist.h(11,20): error C2059: syntax error: '>'
+D:\Collage\Data Structures\Project\DS_Project\DS_Project\Cargolist.h(12,14): error C2065: 'Cargo': undeclared identifier
+D:\Collage\Data Structures\Project\DS_Project\DS_Project\Cargolist.h(12,20): error C2059: syntax error: '>'
+  Truck.cpp
+  Trucklist.cpp
+  Generating Code...
