@@ -31,3 +31,9 @@ int DaynHour::gethours()
 {
 	return hours;
 }
+string DaynHour::stringdisplay()
+	{
+		string currenttime = to_string(day);
+		currenttime = currenttime + ":"+to_string(hour);
+		return currenttime;
+	}
