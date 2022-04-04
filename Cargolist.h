@@ -1,18 +1,21 @@
 #pragma once
-#pragma once
 #include <iostream>
-#include"LinkedList.h"
+#include "queuelist.h"
 #include"Cargo.h"
 #include "Header.h"
+#include "LinkedList.h"
 using namespace std;
 
 class Cargolist
 {
-	LinkedList <Cargo*> special;
-	LinkedList <Cargo*> cnormal;
-	LinkedList <Cargo*> cvip;
+private:
+
+	 
 
 public:
+	queuelist <Cargo*> special;
+	LinkedList <Cargo*> Cnormal;
+	queuelist <Cargo*> cvip;//it will be proirty
 	bool addcargo(int id, type c);
 	//Cargo * remove( int id, type c);
 	//bool addcargo();

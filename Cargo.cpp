@@ -1,22 +1,16 @@
 #include "Cargo.h"
 
-Cargo::Cargo()
-{
-}
-
 Cargo::Cargo(DaynHour Cprepare, DaynHour Cload, int distance, double cost, int id, type c)
 {
-
-
+	this-> Cprepare= Cprepare;
+	this-> Cload= Cprepare;
+	this-> distance= distance;
+	this-> cost=cost;
+	this->ctype=c;
+	this-> ID=id;
 }
-
-int Cargo::getdistance()
+Cargo::Cargo(){}
+int Cargo::getID()
 {
-	return 0;
-}
-
-Cargo* Cargo::GetCargo()
-{
-	Cargo* cptr = this;
-	return cptr;
+	return ID;
 }

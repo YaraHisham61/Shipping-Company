@@ -31,7 +31,6 @@ public:
 	void enqueue(const T& data)
 	{
 		Node<T>* p = frontPtr;
-
 		if (frontPtr)
 		{
 			while (p->getNext())
@@ -58,7 +57,7 @@ public:
 		Node<T>* p = frontPtr;
 		itm = frontPtr->getItem();
 		frontPtr = frontPtr->getNext();
-
+		
 		delete p;
 
 		count--;
@@ -66,7 +65,9 @@ public:
 
 	}
 
-
+	T find(int id)
+	{
+	}
 	bool remove(const int key, T& itm)
 	{
 		Node<T>* p = frontPtr;

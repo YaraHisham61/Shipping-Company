@@ -17,7 +17,7 @@ public :
 	LinkedQueue();	
 	bool isEmpty() const ;
 	bool enqueue(const T& newEntry);
-	bool dequeue(T& frntEntry);  
+	bool dequeue(T& frntEntry);
 	bool peek(T& frntEntry)  const;	
 	~LinkedQueue();
 

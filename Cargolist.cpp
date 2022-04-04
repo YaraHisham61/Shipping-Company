@@ -11,6 +11,11 @@ bool Cargolist::creatcargo(DaynHour Cprepare, DaynHour Cload, int distance, doub
     Cargo* cptr = new Cargo(Cprepare, Cload, distance, cost,id, c);
 
     return false;
+
+}
+bool DequeueNCargo(int id)
+{
+  //  Cnormal.remove();
 }
 
 

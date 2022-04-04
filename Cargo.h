@@ -1,10 +1,6 @@
 #pragma once
 #include "DaynHour.h"
-#include "Cargolist.h"
 #include "Header.h"
-#include <iostream>
-using namespace std;
-
 class Cargo
 {
 	DaynHour Cprepare;
@@ -15,10 +11,11 @@ class Cargo
 	int ID;
 
 public:
-	Cargo();
 	Cargo(DaynHour Cprepare, DaynHour Cload, int distance, double cost, int id, type c);
-	int getdistance();
-	Cargo* GetCargo();
-
+	Cargo();
+	void SetCost(int ncost);
+	int GetCost();
+	int getID();
 
 };
+

@@ -141,7 +141,6 @@
   <ItemGroup>
     <ClInclude Include="CancelEvent.h" />
     <ClInclude Include="Cargo.h" />
-    <ClInclude Include="Cargolist.h" />
     <ClInclude Include="Company.h" />
     <ClInclude Include="Events.h" />
     <ClInclude Include="Header.h" />
@@ -152,13 +151,13 @@
     <ClInclude Include="PromoteEvent.h" />
     <ClInclude Include="QueueADT.h" />
     <ClInclude Include="DaynHour.h" />
+    <ClInclude Include="queuelist.h" />
     <ClInclude Include="Truck.h" />
     <ClInclude Include="Trucklist.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CancelEvent.cpp" />
     <ClCompile Include="Cargo.cpp" />
-    <ClCompile Include="Cargolist.cpp" />
     <ClCompile Include="Company.cpp" />
     <ClCompile Include="Events.cpp" />
     <ClCompile Include="PreparationEvent.cpp" />
