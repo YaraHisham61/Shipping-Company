@@ -4,7 +4,7 @@
 #include "Cargo.h"
 class Events
 {
-private:
+protected:
 	DaynHour ET;
 	int CargoID;
 public:

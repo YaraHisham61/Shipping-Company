@@ -28,7 +28,7 @@ public:
 		return !count;
 	}
 
-	void enqueue(const T& data)
+	bool enqueue(const T& data)
 	{
 		Node<T>* p = frontPtr;
 		if (frontPtr)
@@ -46,6 +46,7 @@ public:
 			frontPtr = R;
 		}
 		count++;
+		return true; //Needs to be handled
 	}
 
 

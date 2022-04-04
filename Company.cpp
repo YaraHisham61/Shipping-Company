@@ -12,9 +12,16 @@ bool Company::DequeueNCargo(int id,Cargo* C1)
 
 }
 
+bool Company::EnqueueNCargo(Cargo* C1)
+{
+
+	return Cnormal.enqueue(C1); //Needs to be handled
+}
+
+
 bool Company::EnqueueVCargo(Cargo* cptr)
 {
-	return Cvip.enqueue(cptr);
+	/*return Cvip.Enqueue(cptr);*/ //Needs to add priority according to the eqn
 	
 }
 

@@ -1,9 +1,9 @@
 #include "Cargo.h"
 
-Cargo::Cargo(DaynHour Cprepare, DaynHour Cload, int distance, double cost, int id, type c)
+Cargo::Cargo(DaynHour Cprepare, int Cload, int distance, double cost, int id, type c)
 {
 	this-> Cprepare= Cprepare;
-	this-> Cload= Cprepare;
+	this-> Cload= Cload;
 	this-> distance= distance;
 	this-> cost=cost;
 	this->ctype=c;
