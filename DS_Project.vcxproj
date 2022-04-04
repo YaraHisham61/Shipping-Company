@@ -144,10 +144,12 @@
     <ClInclude Include="Company.h" />
     <ClInclude Include="Events.h" />
     <ClInclude Include="Header.h" />
+    <ClInclude Include="LinkedPriorityQueue.h" />
     <ClInclude Include="LinkedList.h" />
     <ClInclude Include="LinkedQueue.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="PreparationEvent.h" />
+    <ClInclude Include="PriorityNode.h" />
     <ClInclude Include="PromoteEvent.h" />
     <ClInclude Include="QueueADT.h" />
     <ClInclude Include="DaynHour.h" />

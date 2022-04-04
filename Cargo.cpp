@@ -10,6 +10,14 @@ Cargo::Cargo(DaynHour Cprepare, DaynHour Cload, int distance, double cost, int i
 	this-> ID=id;
 }
 Cargo::Cargo(){}
+void Cargo::SetCost(int ncost)
+{
+	cost = ncost;
+}
+int Cargo::GetCost()
+{
+	return cost;
+}
 int Cargo::getID()
 {
 	return ID;
