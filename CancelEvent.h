@@ -2,6 +2,7 @@
 #include "Events.h"
 class CancelEvent : public Events
 {
-	//hfyh/////////////////////////////////////////
+public:
+	bool Excute();
 };
 

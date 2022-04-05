@@ -14,7 +14,7 @@ public:
 	Cargo(DaynHour Cprepare, int Cload, int distance, double cost, int id, type c);
 	Cargo();
 	void SetCost(int ncost);
-	int GetCost();
+	double GetCost();
 	int getID();
 
 };

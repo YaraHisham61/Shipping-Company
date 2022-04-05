@@ -2,6 +2,7 @@
 #include "DaynHour.h"
 #include "Company.h"
 #include "Cargo.h"
+#include "Header.h"
 class Events
 {
 protected:

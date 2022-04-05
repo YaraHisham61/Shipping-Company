@@ -3,5 +3,5 @@
 bool PreparationEvent::Excute()
 {
 	Cargo* ptr = new Cargo(ET, LT, DIST, cost, CargoID, cType);
-	return Cpointer->EnqueueNCargo(CargoID,ptr);
+	return Cpointer->EnqueueCargo(ptr,cType);
 }

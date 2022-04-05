@@ -14,7 +14,7 @@ void Cargo::SetCost(int ncost)
 {
 	cost = ncost;
 }
-int Cargo::GetCost()
+double Cargo::GetCost()
 {
 	return cost;
 }

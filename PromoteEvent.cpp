@@ -2,11 +2,11 @@
 
 bool PromoteEvent::Excute()
 {
-	Cargo newcargo ;
-	bool exist=Cpointer->DequeueNCargo(GetCargoID(),&newcargo);
+	Cargo * promcargo ;
+	bool exist=Cpointer->DequeueNCargo(GetCargoID(), promcargo);
 	if(!exist)
 	return false;
-	newcargo.SetCost(newcargo.GetCost() + pcost);
-	exist = Cpointer->EnqueueVCargo(&newcargo);
+	promcargo->SetCost(promcargo->GetCost() + pcost);
+	exist = Cpointer->EnqueueCargo(promcargo,type::vip);
 	return exist;
 }

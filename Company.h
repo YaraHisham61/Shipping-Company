@@ -4,6 +4,7 @@
 #include "LinkedQueue.h"
 #include "Trucklist.h"
 #include"LinkedPriorityQueue.h"
+#include "Header.h"
 class Company
 {
 private:
@@ -14,7 +15,6 @@ private:
 public:
 	Company();
 	bool DequeueNCargo(int id,Cargo *C1);
-	bool EnqueueNCargo(Cargo* C1);
-	bool EnqueueVCargo(Cargo* cptr);
+	bool EnqueueCargo(Cargo* C1,type ctype);
 };
 
