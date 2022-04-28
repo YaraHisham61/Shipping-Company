@@ -1,4 +1,12 @@
 #include "Events.h"
+#include "Events.h"
+#include"PreparationEvent.h"
+#include"PromoteEvent.h"
+#include"CancelEvent.h"
+Events::Events(Company* Cptr)
+{
+	Cpointer = Cptr;
+}
 Events::Events(DaynHour t, int id , Company* Cptr)
 {
 	ET = t;

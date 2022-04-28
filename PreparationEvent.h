@@ -7,8 +7,12 @@ private:
 	type cType;
 	int DIST;
 	int LT;
-	int cost;
+	int Cost;
 public:
+	PreparationEvent(Company* Cptr);
+	PreparationEvent(DaynHour Cprepare, int Cload, int distance, double cost, int id, type c, Company* Cptr);
 	bool Excute();
+	void load(ifstream& infile, int type, string file);
+
 };
 

@@ -31,6 +31,7 @@ public:
 	bool enqueue(const T& data)
 	{
 		Node<T>* p = frontPtr;
+
 		if (frontPtr)
 		{
 			while (p->getNext())
@@ -46,7 +47,7 @@ public:
 			frontPtr = R;
 		}
 		count++;
-		return true; //Needs to be handled
+		return true;
 	}
 
 
@@ -56,9 +57,9 @@ public:
 			return false;
 
 		Node<T>* p = frontPtr;
-		itm = frontPtr->getItem();
+		itm = frontPtr->getData();
 		frontPtr = frontPtr->getNext();
-		
+
 		delete p;
 
 		count--;
@@ -66,14 +67,12 @@ public:
 
 	}
 
-	T find(int id)
-	{
-	}
+
 	bool remove(const int key, T& itm)
 	{
 		Node<T>* p = frontPtr;
 		Node<T>* m;
-		if (p && p->getItem()->getID() == key)
+		if (p &&( *(p->getData())) == key)
 		{
 			return dequeue(itm);
 		}
@@ -81,11 +80,11 @@ public:
 		while (p)
 		{
 
-			if (p->getNext() && p->getNext()->getItem()->getID() == key)
+			if (p->getNext() && *(p->getNext()->getData()) == key)
 			{
 				m = p->getNext();
 				p->setNext(p->getNext()->getNext());
-				itm = m->getItem();
+				itm = m->getData();
 				delete m;
 				count--;
 				return true;
@@ -106,23 +105,22 @@ public:
 		if (isEmpty())
 			return false;
 
-		frntEntry = frontPtr->getItem();
+		frntEntry = frontPtr->getData();
 		return true;
 
 	}
-
-	T* toArray()
+	void print()
 	{
-		if (!frontPtr)
-			return nullptr;
-
-		T* Arr = new T[count];
-		Node<T>* p = frontPtr;
-		for (int i = 0; i < count; i++)
+		if (isEmpty())
+			return;
+		Node<T>* ptr = frontPtr;
+		while (ptr->getNext())
 		{
-			Arr[i] = p->getItem();
-			p = p->getNext();
+			cout << *(ptr->getData());
+			cout << ",";
+
+			ptr = ptr->getNext();
 		}
-		return Arr;
+		cout <<*( ptr->getData());
 	}
 };

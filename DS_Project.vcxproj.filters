@@ -13,24 +13,39 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="DS">
-      <UniqueIdentifier>{5fd88071-ce11-4fbd-bb10-a94010517cc9}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Events.h">
+    <ClInclude Include="Node.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DaynHour.h">
+    <ClInclude Include="Queue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PreparationEvent.h">
+    <ClInclude Include="PriQ.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LinkedList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CancelEvent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Cargo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DaynHour.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Events.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PreparationEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="PromoteEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Truck.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Header.h">
@@ -39,66 +54,39 @@
     <ClInclude Include="Company.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Truck.h">
+    <ClInclude Include="UI.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Trucklist.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LinkedQueue.h">
-      <Filter>DS</Filter>
-    </ClInclude>
-    <ClInclude Include="LinkedList.h">
-      <Filter>DS</Filter>
-    </ClInclude>
-    <ClInclude Include="QueueADT.h">
-      <Filter>DS</Filter>
-    </ClInclude>
-    <ClInclude Include="Node.h">
-      <Filter>DS</Filter>
-    </ClInclude>
-    <ClInclude Include="queuelist.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Cargo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PriorityNode.h">
-      <Filter>DS</Filter>
-    </ClInclude>
-    <ClInclude Include="LinkedPriorityQueue.h">
-      <Filter>DS</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Events.cpp">
+    <ClCompile Include="CancelEvent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cargo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="DaynHour.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PreparationEvent.cpp">
+    <ClCompile Include="Events.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CancelEvent.cpp">
+    <ClCompile Include="PreparationEvent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PromoteEvent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="test.cpp">
+    <ClCompile Include="Truck.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Company.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Truck.cpp">
+    <ClCompile Include="UI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Trucklist.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Cargo.cpp">
+    <ClCompile Include="TestCode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

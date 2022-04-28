@@ -8,14 +8,15 @@ class Events
 protected:
 	DaynHour ET;
 	int CargoID;
+	Company* Cpointer;
 public:
+	Events(Company* Cptr);
 	Events(DaynHour t, int id, Company* Cptr);
 	DaynHour GetEventTime();
 	void SetEventTime(DaynHour t);
 	int GetCargoID();
 	void SetCargoID(int id);
-	virtual bool Execute() = 0;
-	Company* Cpointer;
-
+	virtual bool Excute() = 0;
+	virtual void load(ifstream& infile, int type, string file)=0;
 };
 

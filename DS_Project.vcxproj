@@ -18,10 +18,38 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CancelEvent.h" />
+    <ClInclude Include="Cargo.h" />
+    <ClInclude Include="Company.h" />
+    <ClInclude Include="DaynHour.h" />
+    <ClInclude Include="Events.h" />
+    <ClInclude Include="Header.h" />
+    <ClInclude Include="LinkedList.h" />
+    <ClInclude Include="Node.h" />
+    <ClInclude Include="PreparationEvent.h" />
+    <ClInclude Include="PriQ.h" />
+    <ClInclude Include="PromoteEvent.h" />
+    <ClInclude Include="Queue.h" />
+    <ClInclude Include="Truck.h" />
+    <ClInclude Include="UI.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="CancelEvent.cpp" />
+    <ClCompile Include="Cargo.cpp" />
+    <ClCompile Include="Company.cpp" />
+    <ClCompile Include="DaynHour.cpp" />
+    <ClCompile Include="Events.cpp" />
+    <ClCompile Include="PreparationEvent.cpp" />
+    <ClCompile Include="PromoteEvent.cpp" />
+    <ClCompile Include="TestCode.cpp" />
+    <ClCompile Include="Truck.cpp" />
+    <ClCompile Include="UI.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{f6f35d05-b3d4-4e4b-a869-41091c42c7bb}</ProjectGuid>
+    <ProjectGuid>{d9a28acb-c55a-45fb-ae79-edff5f60a46c}</ProjectGuid>
     <RootNamespace>DSProject</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -138,37 +166,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="CancelEvent.h" />
-    <ClInclude Include="Cargo.h" />
-    <ClInclude Include="Company.h" />
-    <ClInclude Include="Events.h" />
-    <ClInclude Include="Header.h" />
-    <ClInclude Include="LinkedPriorityQueue.h" />
-    <ClInclude Include="LinkedList.h" />
-    <ClInclude Include="LinkedQueue.h" />
-    <ClInclude Include="Node.h" />
-    <ClInclude Include="PreparationEvent.h" />
-    <ClInclude Include="PriorityNode.h" />
-    <ClInclude Include="PromoteEvent.h" />
-    <ClInclude Include="QueueADT.h" />
-    <ClInclude Include="DaynHour.h" />
-    <ClInclude Include="queuelist.h" />
-    <ClInclude Include="Truck.h" />
-    <ClInclude Include="Trucklist.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="CancelEvent.cpp" />
-    <ClCompile Include="Cargo.cpp" />
-    <ClCompile Include="Company.cpp" />
-    <ClCompile Include="Events.cpp" />
-    <ClCompile Include="PreparationEvent.cpp" />
-    <ClCompile Include="PromoteEvent.cpp" />
-    <ClCompile Include="test.cpp" />
-    <ClCompile Include="DaynHour.cpp" />
-    <ClCompile Include="Truck.cpp" />
-    <ClCompile Include="Trucklist.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
