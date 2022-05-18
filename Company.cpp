@@ -206,11 +206,136 @@ bool Company::EnqueueCargo(Cargo* C1,type ctype)
 	}
 }
 
+void Company::truckFcheckTavail(DaynHour currT)
+{
+	Truck* removet;
+	
+	while (Vtruksincheck.peek(removet))
+	{
+		if (removet->incheckpriority() >= currT.DaytoHours())
+		{
+			Vtruksincheck.dequeue(removet);
+			Vtruck.enqueue(removet);
+		}
+		else break;
+	}
+	while (Struksincheck.peek(removet))
+	{
+		if (removet->incheckpriority() >= currT.DaytoHours()) {
+			Struksincheck.dequeue(removet);
+			Struck.enqueue(removet);
+		}
+		else
+			break;
+	}
+	while (Ntruksincheck.peek(removet))
+	{
+		if (removet->incheckpriority() >= currT.DaytoHours())
+		{
+			Ntruksincheck.dequeue(removet);
+			Ntruck.enqueue(removet);
+		}
+		else
+			break;
+	}
+}
+
+void Company::movingtrucksToavailAcheck(DaynHour currT)
+{
+	Truck* removet;
+
+	while (Mtrucks.peek(removet))
+	{
+		if (removet->Getendmoving() >= currT.DaytoHours())
+		{
+			if (removet->needsmainaience())
+			{
+				removet->resetjourneys();
+				enqueuechecktrucks(removet);
+			}
+			else
+				enqueueavailtrucks(removet);
+		}
+		else
+			break;
+	}
+}
+
+bool Company::enqueueavailtrucks(Truck* truck)
+{
+	switch (truck->gettype())
+	{
+	case type::vip:
+	{
+		return Ntruck.enqueue(truck);
+	}
+	case type::special:
+	{
+		return Struck.enqueue(truck);
+	}
+	case type::normal:
+	{
+		return Vtruck.enqueue(truck);
+	}
+	default:
+		return false;
+	}
+}
+
+
+	bool Company::enqueuechecktrucks(Truck * truck)
+	{
+		switch (truck->gettype())
+		{
+		case type::vip:
+		{
+			return Ntruksincheck.enqueue(truck);
+		}
+		case type::special:
+		{
+			return Struksincheck.enqueue(truck);
+		}
+		case type::normal:
+		{
+			return Vtruksincheck.enqueue(truck);
+		}
+		default:
+			return false;
+		}
+	}
+
+	void Company::loadingTrucktomoving(DaynHour currT)
+	{
+		Truck* removet;
+		while (loadingtrucks.peek(removet))
+		{
+			if (removet->Getendloading() >= currT.DaytoHours())
+			{
+				removet->addjourney();
+				removet->setmovingtime(currT);
+				Mtrucks.enqueue(removet, removet->MTpriority(currT));
+			}
+			else
+				break;
+		}
+	}
+
+	void Company::CargosAssignment(DaynHour currT)
+	{
+
+
+
+
+
+
+
+
+	}
+	
 void Company::loadall(string file)
 {
 	ifstream infile;
 	infile.open(file, ios::in);
-	
 	if (infile.is_open())
 	{
 		int nn, ns, nv, chn, chs, chv, j, can, cas, cav, sn, ss, sv;
