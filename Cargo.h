@@ -15,6 +15,7 @@ class Cargo
 	int ID;
 	Truck* Movingtruck;
 
+
 public:
 	Cargo(DaynHour Cprepare, int Cload, int distance, double cost, int id, type c);
 	Cargo();
