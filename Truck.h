@@ -18,12 +18,19 @@ class Truck
 	int maxj;
 	Cargo** LCargo;//it has the id of the cargos it carry
 	int carriedcargos;
-
+	int numofjourney;
+	int endcheck;
+	int endmoving;
+	int endloading;
 	//truck can have a pointer to the cargo type it load
 public:
+	bool needsmainaience();
+	void addjourney();
 	DaynHour getmovingtime();
 	Truck(int truckcapacity, int maintenancetime, int maxj,int speed, type ttype);
 	Truck();
+	int incheckpriority();
+	void setincheckpriorty(DaynHour currT);
 	int getID();
 	int getspeed();
 	int getTcapacity();
@@ -42,4 +49,8 @@ public:
 	int LTpriority(DaynHour CurrTime);
 	int GetMaxDistance();
 	int GettotalLtime();
+	int Getendmoving();
+	int Getendloading();
+	void setmovingtime(DaynHour currt);
+	void resetjourneys();
 };
