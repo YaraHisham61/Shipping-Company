@@ -2,10 +2,20 @@
 
 int Truck::IDcounter = 1;
 
+bool Truck::needsmainaience()
+{
+    return numofjourney>=maxj;
+}
+
+void Truck::addjourney()
+{
+    numofjourney++;
+}
 DaynHour Truck::getmovingtime()
 {
     return movingtime;
 }
+
 
 Truck::Truck(int truckcapacity, int maintenancetime, int maxj, int speed, type ttype)
 {
@@ -18,10 +28,15 @@ Truck::Truck(int truckcapacity, int maintenancetime, int maxj, int speed, type t
      carriedcargos = 0;
      ID = IDcounter;
      IDcounter++;
+     numofjourney = 0;
+     endmoving = 0;
+
 }
 
 Truck::Truck()
 {
+    endmoving = 0;
+    numofjourney = 0;
     LCargo = new Cargo*[truckcapacity];
     speed = 0;
     carriedcargos = 0;
@@ -29,6 +44,15 @@ Truck::Truck()
     IDcounter++;
 }
 
+int Truck::incheckpriority()
+{
+    return endcheck;
+    
+}
+void Truck::setincheckpriorty(DaynHour currT)
+{
+    endcheck = maintenancetime + currT.DaytoHours();
+}
 int Truck::getID()
 {
     return ID;
@@ -144,6 +168,7 @@ int Truck::GetCarriedcargos()
 int Truck::LTpriority(DaynHour CurrTime)
 {
     int totalLT = GettotalLtime();
+    endloading= CurrTime.DaytoHours() + totalLT;
     return CurrTime.DaytoHours() + totalLT;
 }
 
@@ -166,7 +191,24 @@ int Truck::GettotalLtime()
     }
     return totalLT;
 }
+int Truck::Getendmoving()
+{
+    return endmoving;
+}
+int Truck::Getendloading()
+{
+    return endloading;
+}
+void Truck::setmovingtime(DaynHour currt)
+{
+    movingtime = currt;
+}
+void Truck::resetjourneys()
+{
+    numofjourney -= maxj;
+}
 int Truck:: MTpriority(DaynHour CurrTime)
 {
+    endmoving= CurrTime.DaytoHours() + deliveryinterval;
     return CurrTime.DaytoHours() + deliveryinterval;
 }
