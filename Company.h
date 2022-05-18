@@ -89,5 +89,10 @@ public:
 	void loadall(string file);
 	bool DequeueNCargo(int id,Cargo *& C1);
 	bool EnqueueCargo(Cargo* C1,type ctype);
+	void truckFcheckTavail(DaynHour currT);
+	void movingtrucksToavailAcheck(DaynHour currT);
+	bool enqueueavailtrucks(Truck* truck);
+	bool enqueuechecktrucks(Truck* truck);
+	void loadingTrucktomoving(DaynHour currT);
+	void CargosAssignment(DaynHour currT);
 };
-
