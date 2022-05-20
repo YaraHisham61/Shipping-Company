@@ -7,7 +7,7 @@ using namespace std;
 int main() {
 	DaynHour Currenthour;
 	Company* thecompany = new Company();
-	cout << "please enter the file name without extentions";
+	cout << "please enter the file name without extentions"<<endl;
 	string filename;
 	cin >> filename;
 	filename += ".txt";
@@ -18,7 +18,8 @@ int main() {
 		
 	}
 
-	cout << "end of the simulation";
+	cout << "end of the simulation"<<endl;
 	delete thecompany;
+	cout << "please enter the file name to save date"<<endl;
 	return 0;
 }

@@ -95,4 +95,5 @@ public:
 	bool enqueuechecktrucks(Truck* truck);
 	void loadingTrucktomoving(DaynHour currT);
 	void CargosAssignment(DaynHour currT);
+	void saveall();
 };

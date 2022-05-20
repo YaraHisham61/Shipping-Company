@@ -405,3 +405,62 @@ void Company::loadall(string file)
 		exit(1);
 	}
 }
+
+void Company::saveall()
+{
+	string file;
+	cout << "please enter the file name to save";
+	cin >> file;
+	file += ".txt";
+	ofstream outfile;
+	outfile.open(file, ios::out);
+	if (outfile.is_open())
+	{
+		outfile << "CDT  ID  PT  WT  TID" << endl;
+		/*while (!CDT.isEmpty())
+		{
+			Cargo* temp;
+			CDT.dequeue(temp);
+			outfile << temp->GetCargodeliverytime().getday()<<":"<< temp->GetCargodeliverytime().gethours()<<"  " << temp->getID()<<"  "<< temp->GetPreparetime().getday() << ":" << temp->GetPreparetime().gethours() << "  " << temp->GetWaitingtime().getday() << ":" << temp->GetWaitingtime().gethours() << "  " << temp->GetTruck()->getID() << endl;
+		}*/
+		outfile << "........................................................." << endl;
+		outfile << "........................................................." << endl;
+		outfile << "Cargos:";
+		outfile << DNCargos.Getcount() + DvCargos.Getcount() + DSCargos.Getcount() << " [ N: " << DNCargos.Getcount() << ", S: " << DSCargos.Getcount() << ", V: " << DvCargos.Getcount() << "]" << endl;
+		int tmp = 0;
+		while (!DNCargos.isEmpty())
+		{
+			Cargo* temp;
+			DNCargos.dequeue(temp);
+			tmp += temp->GetWaitingtime().DaytoHours();
+		}
+		while (!DSCargos.isEmpty())
+		{
+			Cargo* temp;
+
+			DSCargos.dequeue(temp);
+
+			tmp += temp->GetWaitingtime().DaytoHours();
+		}
+		while (!DvCargos.isEmpty())
+		{
+			Cargo* temp;
+			DvCargos.dequeue(temp);
+			tmp += temp->GetWaitingtime().DaytoHours();
+		}
+		DaynHour d(to_string(tmp));
+		outfile << "Cargo Avg Wait = " << d.getday() << ":" << d.gethours() << endl;
+
+		////autopromote
+
+		outfile << "Truck: "<< Ntruck.Getcount()+ Vtruck.Getcount()+ Struck.Getcount();
+
+
+
+
+	}
+	else
+	{
+		cout << "dddddddddddddd";
+	}
+}

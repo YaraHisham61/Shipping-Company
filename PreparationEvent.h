@@ -7,7 +7,7 @@ private:
 	type cType;
 	int DIST;
 	int LT;
-	int Cost;
+	double Cost;
 public:
 	PreparationEvent(Company* Cptr);
 	PreparationEvent(DaynHour Cprepare, int Cload, int distance, double cost, int id, type c, Company* Cptr);
