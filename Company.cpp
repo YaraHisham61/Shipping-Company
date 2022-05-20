@@ -103,21 +103,21 @@ void Company::Simulation(DaynHour CurrT)
 					tempe->Excute();
 					delete tempe;
 				}
-				else 
+				else
 				{
 					break;
 				}
 			}
 			Cargo* tempc = nullptr;
-			if (counter ==6)
+			if (counter == 6)
 			{
 				counter = 1;
-				if(Cnormal.dequeue(tempc))
-				DNCargos.enqueue(tempc);
-				if(Cspecial.dequeue(tempc))
-				DSCargos.enqueue(tempc);
-				if(Cvip.dequeue(tempc))
-				DvCargos.enqueue(tempc);
+				if (Cnormal.dequeue(tempc))
+					DNCargos.enqueue(tempc);
+				if (Cspecial.dequeue(tempc))
+					DSCargos.enqueue(tempc);
+				if (Cvip.dequeue(tempc))
+					DvCargos.enqueue(tempc);
 			}
 			modes(mode, CurrT);
 		}
@@ -177,27 +177,27 @@ void Company::modes(int modenum, DaynHour CurrT)
 
 
 
-bool Company::DequeueNCargo(int id,Cargo*& C1)
+bool Company::DequeueNCargo(int id, Cargo*& C1)
 {
- return Cnormal.remove(id, C1);
+	return Cnormal.remove(id, C1);
 
 }
 
 
 
-bool Company::EnqueueCargo(Cargo* C1,type ctype)
+bool Company::EnqueueCargo(Cargo* C1, type ctype)
 {
 	switch (ctype)
 	{
-	case type::vip :
+	case type::vip:
 	{
 		return Cvip.enqueue(C1, C1->getVipprioity());
 	}
-	case type::special :
+	case type::special:
 	{
 		return Cspecial.enqueue(C1);
 	}
-	case type::normal :
+	case type::normal:
 	{
 		return Cnormal.enqueue(C1);
 	}
@@ -209,7 +209,7 @@ bool Company::EnqueueCargo(Cargo* C1,type ctype)
 void Company::truckFcheckTavail(DaynHour currT)
 {
 	Truck* removet;
-	
+
 	while (Vtruksincheck.peek(removet))
 	{
 		if (removet->incheckpriority() >= currT.DaytoHours())
@@ -282,56 +282,139 @@ bool Company::enqueueavailtrucks(Truck* truck)
 	}
 }
 
-
-	bool Company::enqueuechecktrucks(Truck * truck)
+bool Company::enqueuechecktrucks(Truck* truck)
+{
+	switch (truck->gettype())
 	{
-		switch (truck->gettype())
-		{
-		case type::vip:
-		{
-			return Ntruksincheck.enqueue(truck);
-		}
-		case type::special:
-		{
-			return Struksincheck.enqueue(truck);
-		}
-		case type::normal:
-		{
-			return Vtruksincheck.enqueue(truck);
-		}
-		default:
-			return false;
-		}
+	case type::vip:
+	{
+		return Ntruksincheck.enqueue(truck);
 	}
-
-	void Company::loadingTrucktomoving(DaynHour currT)
+	case type::special:
 	{
-		Truck* removet;
-		while (loadingtrucks.peek(removet))
+		return Struksincheck.enqueue(truck);
+	}
+	case type::normal:
+	{
+		return Vtruksincheck.enqueue(truck);
+	}
+	default:
+		return false;
+	}
+}
+
+void Company::loadingTrucktomoving(DaynHour currT)
+{
+	Truck* removet;
+	while (loadingtrucks.peek(removet))
+	{
+		if (removet->Getendloading() >= currT.DaytoHours())
 		{
-			if (removet->Getendloading() >= currT.DaytoHours())
+			removet->addjourney();
+			removet->setmovingtime(currT);
+			Mtrucks.enqueue(removet, removet->MTpriority(currT));
+		}
+		else
+			break;
+	}
+}
+
+void Company::laodingvip(DaynHour currT)
+{
+	Truck* ttempv;
+	Vtruck.peek(ttempv);
+	Truck* ttempn;
+	Ntruck.peek(ttempn);
+	Truck* ttemps;
+	Struck.peek(ttemps);
+	if (ttempv != NULL)
+	{
+		if (Cvip.getcount() >= ttempv->getTcapacity())
+		{
+			Vtruck.dequeue(ttempv);
+			for (size_t i = 0; i < ttempv->getTcapacity(); i++)
 			{
-				removet->addjourney();
-				removet->setmovingtime(currT);
-				Mtrucks.enqueue(removet, removet->MTpriority(currT));
+				Cargo* ctemp;
+				Cvip.dequeue(ctemp);
+				ttempv->setCargo(ctemp, i);
 			}
-			else
-				break;
+			loadingtrucks.enqueue(ttempv, ttempv->LTpriority(currT));
+		}
+	}
+	else if (ttempn != NULL)
+	{
+		if (Cvip.getcount() >= ttempn->getTcapacity())
+		{
+			Ntruck.dequeue(ttempn);
+			for (size_t i = 0; i < ttempn->getTcapacity(); i++)
+			{
+				Cargo* ctemp;
+				Cvip.dequeue(ctemp);
+				ttempn->setCargo(ctemp, i);
+			}
+			loadingtrucks.enqueue(ttempn, ttempn->LTpriority(currT));
+		}
+	}
+	else if (ttemps != NULL)
+	{
+		if (Cvip.getcount() >= ttemps->getTcapacity())
+		{
+			Struck.dequeue(ttemps);
+			for (size_t i = 0; i < ttemps->getTcapacity(); i++)
+			{
+				Cargo* ctemp;
+				Cvip.dequeue(ctemp);
+				ttemps->setCargo(ctemp, i);
+			}
+			loadingtrucks.enqueue(ttemps, ttemps->LTpriority(currT));
 		}
 	}
 
-	void Company::CargosAssignment(DaynHour currT)
+}
+void Company::laodingnormal(DaynHour currT)
+{
+	Truck* ttempn;
+	Ntruck.peek(ttempn);
+	if (ttempn != NULL)
 	{
-
-
-
-
-
-
-
-
+		if (Cnormal.getCount() >= ttempn->getTcapacity())
+		{
+			Ntruck.dequeue(ttempn);
+			for (size_t i = 0; i < ttempn->getTcapacity(); i++)
+			{
+				Cargo* ctemp;
+				Cnormal.dequeue(ctemp);
+				ttempn->setCargo(ctemp, i);
+			}
+			loadingtrucks.enqueue(ttempn, ttempn->LTpriority(currT));
+		}
 	}
-	
+}
+void Company::laodingspecial(DaynHour currT)
+{
+	Truck* ttemps;
+	Struck.peek(ttemps);
+	if (ttemps != NULL)
+	{
+		if (Cspecial.Getcount() >= ttemps->getTcapacity())
+		{
+			Struck.dequeue(ttemps);
+			for (size_t i = 0; i < ttemps->getTcapacity(); i++)
+			{
+				Cargo* ctemp;
+				Cspecial.dequeue(ctemp);
+				ttemps->setCargo(ctemp, i);
+			}
+			loadingtrucks.enqueue(ttemps, ttemps->LTpriority(currT));
+		}
+	}
+}
+void Company::CargosAssignment(DaynHour currT)
+{
+	laodingvip(currT);
+	laodingnormal(currT);
+	laodingspecial(currT);
+}
 void Company::loadall(string file)
 {
 	ifstream infile;
@@ -453,7 +536,7 @@ void Company::saveall()
 
 		////autopromote
 
-		outfile << "Truck: "<< Ntruck.Getcount()+ Vtruck.Getcount()+ Struck.Getcount();
+		outfile << "Truck: " << Ntruck.Getcount() + Vtruck.Getcount() + Struck.Getcount();
 
 
 
@@ -461,6 +544,6 @@ void Company::saveall()
 	}
 	else
 	{
-		cout << "dddddddddddddd";
+		cout << "Not Save" << "\n";
 	}
 }

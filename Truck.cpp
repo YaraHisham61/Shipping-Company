@@ -4,7 +4,7 @@ int Truck::IDcounter = 1;
 
 bool Truck::needsmainaience()
 {
-    return numofjourney>=maxj;
+    return numofjourney >= maxj;
 }
 
 void Truck::addjourney()
@@ -19,17 +19,17 @@ DaynHour Truck::getmovingtime()
 
 Truck::Truck(int truckcapacity, int maintenancetime, int maxj, int speed, type ttype)
 {
-    this-> truckcapacity= truckcapacity;
-    this->maintenancetime= maintenancetime;
-    this->speed= speed;
-     this->maxj=maxj;
-     this->ttype= ttype;
-     LCargo = new Cargo*[truckcapacity];
-     carriedcargos = 0;
-     ID = IDcounter;
-     IDcounter++;
-     numofjourney = 0;
-     endmoving = 0;
+    this->truckcapacity = truckcapacity;
+    this->maintenancetime = maintenancetime;
+    this->speed = speed;
+    this->maxj = maxj;
+    this->ttype = ttype;
+    LCargo = new Cargo * [truckcapacity];
+    carriedcargos = 0;
+    ID = IDcounter;
+    IDcounter++;
+    numofjourney = 0;
+    endmoving = 0;
 
 }
 
@@ -37,7 +37,7 @@ Truck::Truck()
 {
     endmoving = 0;
     numofjourney = 0;
-    LCargo = new Cargo*[truckcapacity];
+    LCargo = new Cargo * [truckcapacity];
     speed = 0;
     carriedcargos = 0;
     ID = IDcounter;
@@ -47,7 +47,7 @@ Truck::Truck()
 int Truck::incheckpriority()
 {
     return endcheck;
-    
+
 }
 void Truck::setincheckpriorty(DaynHour currT)
 {
@@ -122,7 +122,7 @@ void Truck::print()
         int i = 0;
         for (; i < carriedcargos - 1; i++)
             cout << (LCargo[i])->getID() << ",";
-        cout << LCargo[i]->getID()<<"}";
+        cout << LCargo[i]->getID() << "}";
         break;
 
     }
@@ -143,16 +143,16 @@ void Truck::print()
 
         if (carriedcargos == 0)
             break;
-           cout << "(";
+        cout << "(";
         int i = 0;
         for (; i < carriedcargos - 1; i++)
             cout << (LCargo[i])->getID() << ",";
         cout << LCargo[i]->getID() << ")";
         break;
     }
- //if it reach the default hthen error message should be printed
+    //if it reach the default hthen error message should be printed
     }
-    
+
 }
 
 type Truck::gettype()
@@ -168,7 +168,7 @@ int Truck::GetCarriedcargos()
 int Truck::LTpriority(DaynHour CurrTime)
 {
     int totalLT = GettotalLtime();
-    endloading= CurrTime.DaytoHours() + totalLT;
+    endloading = CurrTime.DaytoHours() + totalLT;
     return CurrTime.DaytoHours() + totalLT;
 }
 
@@ -180,7 +180,7 @@ int Truck::GetMaxDistance()
         if (LCargo[i]->GetDistance() > max)
             max = LCargo[i]->GetDistance();
     }
-    return max ;
+    return max;
 }
 int Truck::GettotalLtime()
 {
@@ -207,8 +207,12 @@ void Truck::resetjourneys()
 {
     numofjourney -= maxj;
 }
-int Truck:: MTpriority(DaynHour CurrTime)
+void Truck::setCargo(Cargo* c, int i)
 {
-    endmoving= CurrTime.DaytoHours() + deliveryinterval;
+    LCargo[i] = c;
+}
+int Truck::MTpriority(DaynHour CurrTime)
+{
+    endmoving = CurrTime.DaytoHours() + deliveryinterval;
     return CurrTime.DaytoHours() + deliveryinterval;
 }

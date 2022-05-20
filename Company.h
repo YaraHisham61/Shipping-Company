@@ -19,7 +19,7 @@ private:
 	LinkedList <Cargo*> Cnormal;
 	Queue <Cargo*> Cspecial;
 	PriQ <Cargo*> Cvip;
-	
+
 	//Moving cargos
 	PriQ <Cargo*> CMnormal;
 	PriQ <Cargo*> CMspecial;
@@ -31,9 +31,9 @@ private:
 	Queue <Cargo*> DvCargos;
 
 	//Loading cargos
-	PriQ <Cargo*> LNcargos;
+	/*PriQ <Cargo*> LNcargos;
 	PriQ <Cargo*> LScargos;
-	PriQ <Cargo*> LVcargos;
+	PriQ <Cargo*> LVcargos;*/
 
 	//Event list
 	Queue <Events*> Eventactions;
@@ -87,13 +87,16 @@ public:
 	void Simulation(DaynHour CurrT);
 	void modes(int modenum, DaynHour CurrT);
 	void loadall(string file);
-	bool DequeueNCargo(int id,Cargo *& C1);
-	bool EnqueueCargo(Cargo* C1,type ctype);
+	bool DequeueNCargo(int id, Cargo*& C1);
+	bool EnqueueCargo(Cargo* C1, type ctype);
 	void truckFcheckTavail(DaynHour currT);
 	void movingtrucksToavailAcheck(DaynHour currT);
 	bool enqueueavailtrucks(Truck* truck);
 	bool enqueuechecktrucks(Truck* truck);
 	void loadingTrucktomoving(DaynHour currT);
 	void CargosAssignment(DaynHour currT);
+	void laodingvip(DaynHour currT);
+	void laodingnormal(DaynHour currT);
+	void laodingspecial(DaynHour currT);
 	void saveall();
 };

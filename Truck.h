@@ -27,7 +27,7 @@ public:
 	bool needsmainaience();
 	void addjourney();
 	DaynHour getmovingtime();
-	Truck(int truckcapacity, int maintenancetime, int maxj,int speed, type ttype);
+	Truck(int truckcapacity, int maintenancetime, int maxj, int speed, type ttype);
 	Truck();
 	int incheckpriority();
 	void setincheckpriorty(DaynHour currT);
@@ -53,4 +53,5 @@ public:
 	int Getendloading();
 	void setmovingtime(DaynHour currt);
 	void resetjourneys();
+	void setCargo(Cargo* c, int i);
 };
