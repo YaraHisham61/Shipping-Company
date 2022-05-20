@@ -319,6 +319,72 @@ void Company::loadingTrucktomoving(DaynHour currT)
 	}
 }
 
+bool Company::NormalCheckMaxW(DaynHour currT)
+{
+	Cargo* Ncargo;
+	Truck* AvaNTruck;
+	int count = 0;
+
+	Ntruck.peek(AvaNTruck);
+	if (AvaNTruck&& loadingtrucks.getcount()<3)
+	{
+		Ntruck.dequeue(AvaNTruck);
+		while (count < AvaNTruck->getTcapacity() && Cnormal.peekFront(Ncargo) && Ncargo->GetWaitingtime(currT).DaytoHours() >= MaxW)
+		{
+			AvaNTruck->setCargo(Ncargo, count);
+			count++;
+		}
+		loadingtrucks.enqueue(AvaNTruck, AvaNTruck->LTpriority(currT));
+		return true;
+	}
+	else if (Struck.peek(AvaNTruck) && loadingtrucks.getcount() < 3)
+	{
+		Struck.dequeue(AvaNTruck);
+		while (count < AvaNTruck->getTcapacity() && Cspecial.peek(Ncargo) && Ncargo->GetWaitingtime(currT).DaytoHours() >= MaxW)
+		{
+			AvaNTruck->setCargo(Ncargo, count);
+			count++;
+		}
+		loadingtrucks.enqueue(AvaNTruck, AvaNTruck->LTpriority(currT));
+		return true;
+	}
+	
+	return false;
+}
+
+bool Company::SpecialCheckMaxW(DaynHour currT)
+{
+	Cargo* Scargo;
+	Truck* AvaSTruck;
+	int count = 0;
+
+	Struck.peek(AvaSTruck);
+	if (AvaSTruck && loadingtrucks.getcount() < 3)
+	{
+		Struck.dequeue(AvaSTruck);
+		while (count < AvaSTruck->getTcapacity() && Cspecial.peek(Scargo) && Scargo->GetWaitingtime(currT).DaytoHours() >= MaxW)
+		{
+			AvaSTruck->setCargo(Scargo, count);
+			count++;
+		}
+		loadingtrucks.enqueue(AvaSTruck, AvaSTruck->LTpriority(currT));
+		return true;
+
+	}
+	return false;
+}
+
+void Company::AutoPromotion(DaynHour CurrTime)
+{
+	Cargo* Ncargo;
+	while (Cnormal.peekFront(Ncargo) && Ncargo->GetWaitingtime(CurrTime).getday() >= AutoP)
+	{
+		Cnormal.dequeue(Ncargo);
+		Ncargo->SetType(type::vip);
+		Cvip.enqueue(Ncargo, Ncargo->getVipprioity());
+	}
+}
+
 void Company::laodingvip(DaynHour currT)
 {
 	Truck* ttempv;
@@ -411,9 +477,14 @@ void Company::laodingspecial(DaynHour currT)
 }
 void Company::CargosAssignment(DaynHour currT)
 {
-	laodingvip(currT);
-	laodingnormal(currT);
-	laodingspecial(currT);
+	if (loadingtrucks.getcount() < 3)
+	{
+		laodingvip(currT);
+		if (!SpecialCheckMaxW(currT))
+			laodingspecial(currT);
+		if (!NormalCheckMaxW(currT))
+			laodingnormal(currT);
+	}
 }
 void Company::loadall(string file)
 {
@@ -445,7 +516,7 @@ void Company::loadall(string file)
 		int au, max;
 		infile >> au >> max;
 		AutoP = au;
-		maxw = max;
+		MaxW = max;
 		int nev;
 		infile >> nev;
 		nevent = nev;
@@ -489,7 +560,7 @@ void Company::loadall(string file)
 	}
 }
 
-void Company::saveall()
+void Company::saveall(DaynHour currT)
 {
 	string file;
 	cout << "please enter the file name to save";
@@ -515,7 +586,7 @@ void Company::saveall()
 		{
 			Cargo* temp;
 			DNCargos.dequeue(temp);
-			tmp += temp->GetWaitingtime().DaytoHours();
+			tmp += temp->GetWaitingtime(currT).DaytoHours();
 		}
 		while (!DSCargos.isEmpty())
 		{
@@ -523,13 +594,13 @@ void Company::saveall()
 
 			DSCargos.dequeue(temp);
 
-			tmp += temp->GetWaitingtime().DaytoHours();
+			tmp += temp->GetWaitingtime(currT).DaytoHours();
 		}
 		while (!DvCargos.isEmpty())
 		{
 			Cargo* temp;
 			DvCargos.dequeue(temp);
-			tmp += temp->GetWaitingtime().DaytoHours();
+			tmp += temp->GetWaitingtime(currT).DaytoHours();
 		}
 		DaynHour d(to_string(tmp));
 		outfile << "Cargo Avg Wait = " << d.getday() << ":" << d.gethours() << endl;

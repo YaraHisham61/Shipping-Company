@@ -42,7 +42,6 @@ public:
 	float TdelivaryIn();
 	int getDeliveryNum();
 	void setDeliveryNum(int n);
-	void print();
 	type gettype();
 	int GetCarriedcargos();
 	int MTpriority(DaynHour CurrTime);

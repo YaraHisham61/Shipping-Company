@@ -30,6 +30,10 @@ type Cargo::getctype()
 {
 	return ctype;
 }
+void Cargo::SetType(type t)
+{
+	ctype = t;
+}
 double Cargo::GetCost()
 {
 	return cost;
@@ -37,6 +41,11 @@ double Cargo::GetCost()
 int Cargo::getID()
 {
 	return ID;
+}
+
+DaynHour Cargo::GetPrepareTime()
+{
+	return Cprepare;
 }
 
 bool Cargo::operator==(int id)
@@ -50,10 +59,15 @@ void Cargo::setID(int i)
 }
 
 
-DaynHour Cargo::GetWaitingtime()
+DaynHour Cargo::GetWaitingtime(DaynHour CurrTime)
 {
-	DaynHour WT ;
-	WT = Movingtruck->getmovingtime() - Cprepare;
+	DaynHour WT;
+	if (!Movingtruck)
+	{
+		WT = CurrTime - Cprepare;
+	}
+	else
+		WT = Movingtruck->getmovingtime() - Cprepare;
 	return WT;
 }
 
@@ -72,6 +86,16 @@ DaynHour Cargo::GetCargodeliverytime()
 int Cargo::GetDistance()
 {
 	return distance;
+}
+
+void Cargo::SetMovingTime()
+{
+	MovingTime=Movingtruck->getmovingtime();
+}
+
+DaynHour Cargo::GetMovingTime()
+{
+	return MovingTime;
 }
 
 int Cargo::GetMpriority(DaynHour CurrTime)

@@ -56,7 +56,7 @@ private:
 	PriQ <Truck*> loadingtrucks;
 
 	int numberjourney; //Number of journeys of trucks before Check-up
-	int maxw;
+	int MaxW;
 	int nevent;
 
 public:
@@ -94,9 +94,12 @@ public:
 	bool enqueueavailtrucks(Truck* truck);
 	bool enqueuechecktrucks(Truck* truck);
 	void loadingTrucktomoving(DaynHour currT);
+	bool NormalCheckMaxW(DaynHour currT);
+	bool SpecialCheckMaxW(DaynHour currT);
+	void AutoPromotion(DaynHour CurrTime);
 	void CargosAssignment(DaynHour currT);
 	void laodingvip(DaynHour currT);
 	void laodingnormal(DaynHour currT);
 	void laodingspecial(DaynHour currT);
-	void saveall();
+	void saveall(DaynHour currT);
 };

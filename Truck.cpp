@@ -109,52 +109,6 @@ void Truck::setDeliveryNum(int n)
     maxj = n;
 }
 
-void Truck::print()
-{
-    cout << ID;
-    switch (ttype)
-    {
-    case type::vip:
-    {
-        if (carriedcargos == 0)
-            break;
-        cout << "{";
-        int i = 0;
-        for (; i < carriedcargos - 1; i++)
-            cout << (LCargo[i])->getID() << ",";
-        cout << LCargo[i]->getID() << "}";
-        break;
-
-    }
-    case type::normal:
-    {
-
-        if (carriedcargos == 0)
-            break;
-        cout << "[";
-        int i = 0;
-        for (; i < carriedcargos - 1; i++)
-            cout << (LCargo[i])->getID() << ",";
-        cout << LCargo[i]->getID() << "]";
-        break;
-    }
-    case type::special:
-    {
-
-        if (carriedcargos == 0)
-            break;
-        cout << "(";
-        int i = 0;
-        for (; i < carriedcargos - 1; i++)
-            cout << (LCargo[i])->getID() << ",";
-        cout << LCargo[i]->getID() << ")";
-        break;
-    }
-    //if it reach the default hthen error message should be printed
-    }
-
-}
-
 type Truck::gettype()
 {
     return ttype;

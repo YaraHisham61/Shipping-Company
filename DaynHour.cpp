@@ -53,11 +53,11 @@ int DaynHour::gethours()
 	return hours;
 }
 string DaynHour::stringdisplay()
-	{
-		string currenttime = to_string(day);
-		currenttime = currenttime + ":" + to_string(hours);
-		return currenttime;
-	}
+{
+	string currenttime = to_string(day);
+	currenttime = currenttime + ":" + to_string(hours);
+	return currenttime;
+}
 
 bool DaynHour::operator==(DaynHour t2)
 {

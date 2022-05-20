@@ -14,7 +14,7 @@ class Cargo
 	type ctype;
 	int ID;
 	Truck* Movingtruck;
-
+	DaynHour MovingTime;
 
 public:
 	Cargo(DaynHour Cprepare, int Cload, int distance, double cost, int id, type c);
@@ -22,13 +22,17 @@ public:
 	int getVipprioity();
 	void SetCost(int ncost);
 	type getctype();
+	void SetType(type t);
 	double GetCost();
 	int getID();
+	DaynHour GetPrepareTime();
 	bool operator==(int id);
 	void setID(int i);
 	int GetLtime();
 	int GetDistance();
-	DaynHour GetWaitingtime();
+	void SetMovingTime();
+	DaynHour GetMovingTime();
+	DaynHour GetWaitingtime(DaynHour CurrTime);
 	DaynHour GetCargodeliverytime();
 	int GetMpriority(DaynHour CurrTime);
 };

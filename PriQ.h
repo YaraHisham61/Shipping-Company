@@ -15,6 +15,7 @@ public:
 	PriQ()
 	{
 		Head = NULL;
+		count = 0;
 	}
 
 	//Function that enqueues the elemtents sorted according to the key
