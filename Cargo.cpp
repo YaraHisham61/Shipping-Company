@@ -98,7 +98,18 @@ DaynHour Cargo::GetMovingTime()
 	return MovingTime;
 }
 
+int  Cargo::GetEndMovingTime()
+{ 
+	return EndMovingTime;
+}
+
 int Cargo::GetMpriority(DaynHour CurrTime)
 {
-	return CurrTime.DaytoHours()+ distance/ Movingtruck->getspeed();
+	EndMovingTime = CurrTime.DaytoHours() + distance / Movingtruck->getspeed();
+	return EndMovingTime;
+}
+
+Truck* Cargo::GetTruck()
+{
+	return Movingtruck;
 }

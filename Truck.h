@@ -53,4 +53,5 @@ public:
 	void setmovingtime(DaynHour currt);
 	void resetjourneys();
 	void setCargo(Cargo* c, int i);
+	Cargo* getCargo(int i);
 };

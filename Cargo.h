@@ -15,6 +15,7 @@ class Cargo
 	int ID;
 	Truck* Movingtruck;
 	DaynHour MovingTime;
+	int EndMovingTime;
 
 public:
 	Cargo(DaynHour Cprepare, int Cload, int distance, double cost, int id, type c);
@@ -34,6 +35,8 @@ public:
 	DaynHour GetMovingTime();
 	DaynHour GetWaitingtime(DaynHour CurrTime);
 	DaynHour GetCargodeliverytime();
+	int GetEndMovingTime();
 	int GetMpriority(DaynHour CurrTime);
+	Truck* GetTruck();
 };
 

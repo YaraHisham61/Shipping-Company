@@ -81,6 +81,58 @@ PriQ<Truck*>& Company::getloadingtrucks()
 	return loadingtrucks;
 }
 
+void Company::movingcargoscheck(DaynHour currT)
+{
+	Cargo* temp;
+	CMnormal.peek(temp);
+	while (temp->GetEndMovingTime() >= currT.DaytoHours())
+	{
+		Truck* ttemp = temp->GetTruck();
+		for (int i = 0; i < ttemp->getTcapacity(); i++)
+		{
+			if (temp = ttemp->getCargo(i))
+			{
+				ttemp->setCargo(nullptr, i);
+				break;
+			}
+		}
+		DNCargos.enqueue(temp);
+		CMnormal.dequeue(temp);
+		CMnormal.peek(temp);
+	}
+	CMspecial.peek(temp);
+	while (temp->GetEndMovingTime() >= currT.DaytoHours())
+	{
+		Truck* ttemp = temp->GetTruck();
+		for (int i = 0; i < ttemp->getTcapacity(); i++)
+		{
+			if (temp = ttemp->getCargo(i))
+			{
+				ttemp->setCargo(nullptr, i);
+				break;
+			}
+		}
+		DSCargos.enqueue(temp);
+		CMspecial.dequeue(temp);
+		CMspecial.peek(temp);
+	}
+	CMvip.peek(temp);
+	while (temp->GetEndMovingTime() >= currT.DaytoHours())
+	{
+		Truck* ttemp = temp->GetTruck();
+		for (int i = 0; i < ttemp->getTcapacity(); i++)
+		{
+			if (temp = ttemp->getCargo(i))
+			{
+				ttemp->setCargo(nullptr, i);
+				break;
+			}
+		}
+		DvCargos.enqueue(temp);
+		CMvip.dequeue(temp);
+		CMvip.peek(temp);
+	}
+}
 
 void Company::Simulation(DaynHour CurrT)
 {

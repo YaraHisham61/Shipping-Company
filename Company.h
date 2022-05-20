@@ -83,7 +83,7 @@ public:
 	//loading trucks
 	PriQ <Truck*>& getloadingtrucks();
 
-
+	void movingcargoscheck(DaynHour currT);
 	void Simulation(DaynHour CurrT);
 	void modes(int modenum, DaynHour CurrT);
 	void loadall(string file);

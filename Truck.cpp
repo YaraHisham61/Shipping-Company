@@ -165,6 +165,10 @@ void Truck::setCargo(Cargo* c, int i)
 {
     LCargo[i] = c;
 }
+Cargo* Truck::getCargo(int i)
+{
+    return LCargo[i];
+}
 int Truck::MTpriority(DaynHour CurrTime)
 {
     endmoving = CurrTime.DaytoHours() + deliveryinterval;
