@@ -389,10 +389,10 @@ bool Company::NormalCheckMaxW(DaynHour currT)
 		loadingtrucks.enqueue(AvaNTruck, AvaNTruck->LTpriority(currT));
 		return true;
 	}
-	else if (Struck.peek(AvaNTruck) && loadingtrucks.getcount() < 3)
+	else if (Vtruck.peek(AvaNTruck) && loadingtrucks.getcount() < 3)
 	{
-		Struck.dequeue(AvaNTruck);
-		while (count < AvaNTruck->getTcapacity() && Cspecial.peek(Ncargo) && Ncargo->GetWaitingtime(currT).DaytoHours() >= MaxW)
+		Vtruck.dequeue(AvaNTruck);
+		while (count < AvaNTruck->getTcapacity() && Cvip.peek(Ncargo) && Ncargo->GetWaitingtime(currT).DaytoHours() >= MaxW)
 		{
 			AvaNTruck->setCargo(Ncargo, count);
 			count++;
