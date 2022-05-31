@@ -20,26 +20,13 @@ private:
 	Queue <Cargo*> Cspecial;
 	PriQ <Cargo*> Cvip;
 
-	//Moving cargos
-	PriQ <Cargo*> CMnormal;
-	PriQ <Cargo*> CMspecial;
-	PriQ <Cargo*> CMvip;
-
 	//Deliviered cargos
-	Queue <Cargo*> DNCargos;
-	Queue <Cargo*> DSCargos;
-	Queue <Cargo*> DvCargos;
-
-	//Loading cargos
-	/*PriQ <Cargo*> LNcargos;
-	PriQ <Cargo*> LScargos;
-	PriQ <Cargo*> LVcargos;*/
+	Queue <Cargo*> DCargos;
 
 	//Event list
 	Queue <Events*> Eventactions;
 
 	//Available trucks
-
 	Queue <Truck*> Ntruck;
 	Queue <Truck*> Vtruck;
 	Queue <Truck*> Struck;
@@ -47,44 +34,58 @@ private:
 	//Moving trucks
 	PriQ <Truck*> Mtrucks;
 
+	//loading trucks
+	Truck* truck1;
+	Truck* truck2;
+	Truck* truck3;
+
 	//In-check trucks
 	Queue <Truck*>Ntruksincheck;
 	Queue <Truck*>Struksincheck;
 	Queue <Truck*>Vtruksincheck;
-
-	//loading trucks
-	PriQ <Truck*> loadingtrucks;
+	
+	//CDT cargo
+	PriQ <Cargo*> CDT;
 
 	int numberjourney; //Number of journeys of trucks before Check-up
 	int MaxW;
 	int nevent;
+	float CountAuto;
+	float totalacttime;
+	float totalutilization;
 
 public:
 	Company();
+	bool PeakTruckNightShift(Truck*& T, type Ttype);
+	bool getNnightshift(Truck*& t);
+	bool getSnightshift(Truck*& t);
+	bool getVnightshift(Truck*& t);
+
+	bool peaktruckmaintaining(Truck*& T, type Ttype);
+	bool Struckmaintaining();
+	bool Vtruckmaintaining();
+	bool Ntruckmaintaining();
+	void deliveryfailure(Truck*& t, DaynHour currt);
+	bool typeexist(type c);
+	bool emptyexist();
+	bool enqueueintrucks(Truck*& temp);
+	Truck*& gettruck1();
+	Truck*& gettruck2();
+	Truck*& gettruck3();
 	LinkedList <Cargo*>& getCnormal();
 	Queue <Cargo*>& getCspecial();
 	PriQ <Cargo*>& getCvip();
-	PriQ <Cargo*>& getCMnormal();
-	PriQ <Cargo*>& getCMspecial();
-	PriQ <Cargo*>& getCMvip();
-	Queue <Cargo*>& getDNCargos();
-	Queue <Cargo*>& getDSCargos();
-	Queue <Cargo*>& getDvCargos();
+	Queue <Cargo*>& getDCargos();
 	Queue <Truck*>& getNtruck();
 	Queue <Truck*>& getVtruck();
 	Queue <Truck*>& getStruck();
-	//moving truck
 	PriQ <Truck*>& getMtrucks();
-	//incheck trucks
 	Queue <Truck*>& getNtruksincheck();
 	Queue <Truck*>& getStruksincheck();
 	Queue <Truck*>& getVtruksincheck();
 
-	//loading trucks
-	PriQ <Truck*>& getloadingtrucks();
-
-	void movingcargoscheck(DaynHour currT);
-	void Simulation(DaynHour CurrT);
+	void deliveredcargoscheck(DaynHour currT);
+	void Simulation(DaynHour &CurrT);
 	void modes(int modenum, DaynHour CurrT);
 	void loadall(string file);
 	bool DequeueNCargo(int id, Cargo*& C1);
@@ -96,10 +97,13 @@ public:
 	void loadingTrucktomoving(DaynHour currT);
 	bool NormalCheckMaxW(DaynHour currT);
 	bool SpecialCheckMaxW(DaynHour currT);
+	bool VipCheckMaxW(DaynHour currT);
 	void AutoPromotion(DaynHour CurrTime);
 	void CargosAssignment(DaynHour currT);
 	void laodingvip(DaynHour currT);
 	void laodingnormal(DaynHour currT);
 	void laodingspecial(DaynHour currT);
 	void saveall(DaynHour currT);
+	void setactivetimeandutilization(DaynHour currT);
+	bool isWorkingHours(DaynHour currT);
 };

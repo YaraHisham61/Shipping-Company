@@ -15,9 +15,15 @@ class Cargo
 	int ID;
 	Truck* Movingtruck;
 	DaynHour MovingTime;
-	int EndMovingTime;
+	DaynHour EndMovingTime;
+	DaynHour waitingtime;
+	DaynHour cdt;
+	int ploading;
 
 public:
+	int getploading();
+	void ploadreset();
+	void setploading(int t);
 	Cargo(DaynHour Cprepare, int Cload, int distance, double cost, int id, type c);
 	Cargo();
 	int getVipprioity();
@@ -31,12 +37,12 @@ public:
 	void setID(int i);
 	int GetLtime();
 	int GetDistance();
-	void SetMovingTime();
-	DaynHour GetMovingTime();
+	void SetMovingTime(DaynHour c);
 	DaynHour GetWaitingtime(DaynHour CurrTime);
 	DaynHour GetCargodeliverytime();
-	int GetEndMovingTime();
-	int GetMpriority(DaynHour CurrTime);
+	DaynHour getendmoving();
+	bool SetEndMovingTime(DaynHour CurrTime);
+	void settruck(Truck* t);
 	Truck* GetTruck();
 };
 

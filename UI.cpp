@@ -3,42 +3,64 @@
 ostream& operator <<(ostream& out, Truck& CurrT)
 {
 	out << CurrT.getID();
-	if (CurrT.GetCarriedcargos() == 0)
+	if (!CurrT.getCargo())
 		return out;
-	switch ((CurrT.getCargosid()[0])->getctype())
-	{
-	case type::vip:
-	{
-		out << "{";
-		int i = 0;
-		for (; i < CurrT.GetCarriedcargos() - 1; i++)
-			out << ((CurrT.getCargosid())[i])->getID() << ",";
-		out << (CurrT.getCargosid())[i]->getID() << "}";
-		break;
+	Cargo* ctemp=nullptr;
+	Queue<Cargo*> qtemp;
 
-	}
-	case type::normal:
+	if (!CurrT.getCargosid().isEmpty())
 	{
-		out << "[";
-		int i = 0;
-		for (; i < CurrT.GetCarriedcargos() - 1; i++)
-			out << ((CurrT.getCargosid())[i])->getID() << ",";
-		out << (CurrT.getCargosid())[i]->getID() << "]";
-		break;
+		CurrT.getCargosid().peek(ctemp);
+		switch (ctemp->getctype())
+		{
+		case type::vip:
+		{
+			out << "{";
+			while (CurrT.getCargosid().dequeue(ctemp))
+			{
+				qtemp.enqueue(ctemp);
+				out << ctemp->getID();
+				if (!CurrT.getCargosid().isEmpty())
+					out << ",";
+				else
+					out << "}";
+			}
+			break;
+		}
+		case type::normal:
+		{
+			out << "[";
+			while (CurrT.getCargosid().dequeue(ctemp))
+			{
+				qtemp.enqueue(ctemp);
+				out << ctemp->getID();
+				if (!CurrT.getCargosid().isEmpty())
+					out << ",";
+				else
+					out << "]";
+			}
+			break;
+		}
+		case type::special:
+		{
+			
+			out << "(";
+			while (CurrT.getCargosid().dequeue(ctemp))
+			{
+				qtemp.enqueue(ctemp);
+				out << ctemp->getID();
+				if (!CurrT.getCargosid().isEmpty())
+					out << ",";
+				else
+					out << ")";
+			}
+			break;
+		}
+		
+		}
 	}
-	case type::special:
-	{
-
-
-		out << "(";
-		int i = 0;
-		for (; i < CurrT.GetCarriedcargos() - 1; i++)
-			out << ((CurrT.getCargosid())[i])->getID() << ",";
-		out << (CurrT.getCargosid())[i]->getID() << ")";
-		break;
-	}
-	//if it reach the default hthen error message should be printed
-	}
+	while (qtemp.dequeue(ctemp))
+		CurrT.getCargosid().enqueue(ctemp,ctemp->GetDistance());//the prioirty of the cargos in the truck is the distance
 	return out;
 }
 
@@ -80,11 +102,12 @@ void UI::Interactivemode(DaynHour CurrT)
 	cout << "-----------------------------------------------------" << endl;
 	printDeliveredCargos();
 	cout << endl << endl;
-	//cin.ignore();
+
 }
 
 void UI::Silentmode(DaynHour CurrT)
 {
+	if(CurrT.DaytoHours()==0)
 	//the output file should be produced
 	cout << "Silent Mode" << endl << "Simulation Starts" << endl << "Simulation Ends, output file created"<<endl;
 }
@@ -110,7 +133,7 @@ void UI::Step_by_Step(DaynHour CurrT)
 	cout << endl << endl;
 	//delivered.
 	//it should take some time 
-	Sleep(10);
+	Sleep(1000);
 }
 
 void UI::printincheckcTrucks()
@@ -140,14 +163,23 @@ void UI::printwaitingcargos()
 
 void UI::printmovingcargos()
 {
-	int num = (Cptr->getCMnormal().getcount()) + (Cptr->getCMspecial().getcount()) + (Cptr->getCMvip().getcount());
-	cout << num << " Moving cargos : [";
-	Cptr->getCMnormal().print();
-	cout << "] (";
-	Cptr->getCMspecial().print();
-	cout << ") {";
-	Cptr->getCMvip().print();
-	cout << "}" << endl;
+	Truck* ttemp = nullptr;
+	Queue<Truck*> qtemp;
+	Cargo* temp;
+	int num = 0;
+	while (Cptr->getMtrucks().dequeue(ttemp))
+	{
+		qtemp.enqueue(ttemp);
+		num += ttemp->getCargosid().getcount();		
+	}
+	cout << num << " Moving cargos :";
+	while (qtemp.dequeue(ttemp))
+	{
+		cout << *ttemp<<"  ";
+		Cptr->getMtrucks().enqueue(ttemp,ttemp->Getendmoving());
+		
+	}
+	cout << endl;
 }
 
 void UI::printEmptytruck()
@@ -164,20 +196,55 @@ void UI::printEmptytruck()
 
 void UI::printDeliveredCargos()
 {
-	int num = (Cptr->getDNCargos().Getcount()) + (Cptr->getDSCargos().Getcount()) + (Cptr->getDvCargos().Getcount());
-	cout << num << " Delivered Cargos : [";
-	Cptr->getDNCargos().print();
-	cout << "] (";
-	Cptr->getDSCargos().print();
-	cout << ") {";
-	Cptr->getDvCargos().print();
-	cout << "}" << endl;
+	int num = (Cptr->getDCargos().Getcount());
+	cout << num << " Delivered Cargos :";
+	Queue<Cargo*>qtemp;
+	Cargo* ctemp = nullptr;
+	while (Cptr->getDCargos().dequeue(ctemp))
+	{
+		qtemp.enqueue(ctemp);
+		switch (ctemp->getctype())
+		{
+		case type::normal:
+		{
+			cout << "[" << *ctemp << "]";
+			break;
+		}
+		case type::special:
+		{
+			cout << "(" << *ctemp << ")";
+			break;
+
+		}
+		case type::vip:
+		{
+			cout << "{" << *ctemp << "}";
+			break;
+		}
+		}
+	}
+	while (qtemp.dequeue(ctemp))
+		Cptr->getDCargos().enqueue(ctemp);
+
+	cout << endl;
 }
 
 void UI::printLoadingTrucks()
 {
-	int num = Cptr->getloadingtrucks().getcount();
-	cout << num << " Loading Trucks";
-	Cptr->getloadingtrucks().print();
-	cout << endl;
+	int num = 0;
+	if (Cptr->gettruck1())
+		num++;
+	if (Cptr->gettruck2())
+		num++;
+	if (Cptr->gettruck3())
+		num++;
+	cout << num << " Loading Trucks :";
+	if (Cptr->gettruck1())
+		cout << *(Cptr->gettruck1())<<"  " ;
+	if (Cptr->gettruck2())
+		cout << *(Cptr->gettruck2()) << "  ";
+	if (Cptr->gettruck3())
+		cout << *(Cptr->gettruck3()) << "  ";
+	
+	cout <<  endl;
 }

@@ -4,7 +4,11 @@ DaynHour::DaynHour()
 {
 	day = hours = 0;
 }
-
+DaynHour::DaynHour(int a)
+{
+	day = a / 24;
+	hours = a % 24;
+}
 DaynHour::DaynHour(string a)
 {
 	string b;
@@ -29,14 +33,14 @@ DaynHour::DaynHour(string a)
 void DaynHour::setday(int d)
 {
 	if (d > 0)
-		d += d;
+		day = d;
 }
 
 void DaynHour::sethours(int h)
 {
 	if (h > 0)
 		hours = h;
-	if (hours >= 24)
+	while (hours >= 24)
 	{
 		hours -= 24;
 		day += 1;
@@ -65,11 +69,16 @@ bool DaynHour::operator==(DaynHour t2)
 	return (this->day==t2.getday()&&this->hours==t2.gethours());
 }
 
+void DaynHour::operator=(int t2)
+{
+	day = 0;
+	hours = 0;
+}
+
 DaynHour DaynHour::operator-(DaynHour t2)
 {
-	DaynHour difference;
-	difference.day = day - t2.day;
-	difference.hours = hours - t2.hours;
+	int x = DaytoHours() - t2.DaytoHours();
+	DaynHour difference(x);
 	return difference;
 }
 
@@ -78,7 +87,8 @@ DaynHour DaynHour::operator+(int t2)
 
 	DaynHour sum;
 	sum.sethours(hours + t2);
-	sum.setday(sum.getday() + day);
+	int x = sum.getday() + day;
+	sum.setday(x);
 	return sum;
 }
 

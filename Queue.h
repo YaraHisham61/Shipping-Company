@@ -4,8 +4,6 @@
 
 using namespace std;
 
-
-
 template <typename T>
 class Queue
 {
@@ -80,5 +78,13 @@ public:
 			ptr = ptr->getNext();
 		}
 		cout << *(ptr->getData());
+	}
+	~Queue()
+	{
+		T temp;
+		while (!isEmpty())
+		{
+			dequeue(temp);
+		}
 	}
 };

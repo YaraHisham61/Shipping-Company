@@ -98,5 +98,12 @@ public:
 		cout << *(ptr->getData());
 
 	}
-
+	~PriQ()
+	{
+		T temp;
+		while (!isEmpty())
+		{
+			dequeue(temp);
+		}
+	}
 };

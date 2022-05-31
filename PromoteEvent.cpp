@@ -17,6 +17,7 @@ bool PromoteEvent::Excute()
 		//error message should be printed
 	return false;
 	promcargo->SetCost(promcargo->GetCost() + pcost);
+	promcargo->SetType(type::vip);
 	exist = Cpointer->EnqueueCargo(promcargo,type::vip);
 	return exist;
 }

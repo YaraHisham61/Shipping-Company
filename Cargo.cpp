@@ -2,6 +2,23 @@
 #include "Truck.h"
 
 
+int Cargo::getploading()
+{
+	return ploading;
+}
+
+void Cargo::ploadreset()
+{
+	
+		ploading = 0;
+	
+}
+
+void Cargo::setploading(int t)
+{
+	ploading += t;
+}
+
 Cargo::Cargo(DaynHour Cprepare, int Cload, int distance, double cost, int id, type c)
 {
 	this-> Cprepare= Cprepare;
@@ -10,6 +27,10 @@ Cargo::Cargo(DaynHour Cprepare, int Cload, int distance, double cost, int id, ty
 	this-> cost=cost;
 	this->ctype=c;
 	this-> ID=id;
+	waitingtime.setday(0) ;
+	waitingtime.sethours(0);
+	ploading = 0;
+
 }
 int Cargo::getVipprioity()
 {
@@ -20,8 +41,12 @@ int Cargo::getVipprioity()
 }
 Cargo::Cargo()
 {
+	ploading = 0;
 	cost= 0;
+	waitingtime.setday(0);
+	waitingtime.sethours(0);
 }
+
 void Cargo::SetCost(int ncost)
 {
 	cost = ncost;
@@ -62,14 +87,17 @@ void Cargo::setID(int i)
 DaynHour Cargo::GetWaitingtime(DaynHour CurrTime)
 {
 	DaynHour WT;
-	if (!Movingtruck)
+
+	if (!Movingtruck&&MovingTime.DaytoHours()==0)
 	{
 		WT = CurrTime - Cprepare;
 	}
 	else
-		WT = Movingtruck->getmovingtime() - Cprepare;
+		WT = MovingTime - Cprepare;
+
 	return WT;
 }
+
 
 int Cargo::GetLtime()
 {
@@ -78,9 +106,12 @@ int Cargo::GetLtime()
 
 DaynHour Cargo::GetCargodeliverytime()
 {
-	DaynHour CDT;
-	CDT = Movingtruck->getmovingtime() + (distance / Movingtruck->getspeed()) + Cload;
-	return CDT;
+	return cdt;
+}
+
+DaynHour Cargo::getendmoving()
+{
+	return EndMovingTime + ploading;
 }
 
 int Cargo::GetDistance()
@@ -88,25 +119,21 @@ int Cargo::GetDistance()
 	return distance;
 }
 
-void Cargo::SetMovingTime()
+void Cargo::SetMovingTime(DaynHour c)
 {
-	MovingTime=Movingtruck->getmovingtime();
+	MovingTime=c;
 }
 
-DaynHour Cargo::GetMovingTime()
+bool Cargo::SetEndMovingTime(DaynHour CurrTime)//to check if the current time is the time to be delivered
 {
-	return MovingTime;
+	EndMovingTime = CurrTime + ceil(1.0* distance / Movingtruck->getspeed())+Cload;
+	cdt = CurrTime + ceil(1.0* distance / Movingtruck->getspeed())+Cload;
+	return true;
 }
 
-int  Cargo::GetEndMovingTime()
-{ 
-	return EndMovingTime;
-}
-
-int Cargo::GetMpriority(DaynHour CurrTime)
+void Cargo::settruck(Truck* t)
 {
-	EndMovingTime = CurrTime.DaytoHours() + distance / Movingtruck->getspeed();
-	return EndMovingTime;
+	Movingtruck = t;
 }
 
 Truck* Cargo::GetTruck()

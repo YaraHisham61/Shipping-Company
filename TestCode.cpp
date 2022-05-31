@@ -1,4 +1,3 @@
-//#include "Company.h"
 #include <iostream>
 #include "Company.h"
 #include <ostream>
@@ -17,9 +16,7 @@ int main() {
 		thecompany->Simulation(Currenthour);
 		
 	}
-
-	cout << "end of the simulation"<<endl;
+	thecompany->saveall(Currenthour);
 	delete thecompany;
-	cout << "please enter the file name to save date"<<endl;
 	return 0;
 }

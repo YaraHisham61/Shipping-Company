@@ -20,7 +20,11 @@ public:
 
 	~LinkedList()
 	{
-
+		T temp;
+		while (!isEmpty())
+		{
+			dequeue(temp);
+		}
 	}
 
 	bool isEmpty() const
